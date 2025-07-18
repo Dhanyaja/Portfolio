@@ -8,29 +8,43 @@ import {
   Twitch,
   Twitter,
 } from "lucide-react";
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import { cn } from "@/lib/utils";
-import {useToast} from '@/hooks/use-toast'
+import { useToast } from '@/hooks/use-toast';
+import emailjs from '@emailjs/browser';
 
 const ContactSection = () => {
-
-  const {toast} = useToast();
+  const { toast } = useToast();
   const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const formRef = useRef(null);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
     setIsSubmitting(true);
 
-    setTimeout(() => {
+    emailjs.sendForm(
+      'service_g8i3oh2',   // Replace with your EmailJS Service ID
+      'template_63ix2ql',  // Replace with your EmailJS Template ID
+      formRef.current,
+      'n1i7B4RJonUNQMob_'    // Replace with your EmailJS Public Key
+    )
+      .then(() => {
         toast({
           title: 'Message sent!',
           description: "Thank you for your message. I'll get back to you soon."
-        })
+        });
         setIsSubmitting(false);
-    }, 1500)
-
-
+        formRef.current.reset();
+      })
+      .catch((error) => {
+        console.error(error);
+        toast({
+          title: 'Error sending message',
+          description: "Please try again later."
+        });
+        setIsSubmitting(false);
+      });
   }
 
   return (
@@ -42,15 +56,17 @@ const ContactSection = () => {
         </h2>
 
         <p className="text-center text-muted-foreground mb-12 max-w-2xl mx-auto">
-          Have a project in mind or want to collaborate? Feel free to react out.
-          I'm always open to discussing new oppurtunities.
+          Have a project in mind or want to collaborate? Feel free to reach out.
+          I'm always open to discussing new opportunities.
         </p>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
+          {/* Contact Information */}
           <div className="space-y-8">
             <h3 className="text-2xl font-semibold mb-6">Contact Information</h3>
 
             <div className="space-y-6 justify-center">
+              {/* Email */}
               <div className="flex items-start space-x-4">
                 <div className="p-3 rounded-full bg-primary/10">
                   <Mail className="h-6 w-6 text-primary" />
@@ -65,6 +81,7 @@ const ContactSection = () => {
                   </a>
                 </div>
               </div>
+              {/* Phone */}
               <div className="flex items-start space-x-4">
                 <div className="p-3 rounded-full bg-primary/10">
                   <Phone className="h-6 w-6 text-primary" />
@@ -72,22 +89,21 @@ const ContactSection = () => {
                 <div>
                   <h4 className="font-medium">Phone</h4>
                   <a
-                    href="tel:+11234567890"
+                    href="tel:+917396681980"
                     className="text-muted-foreground hover:text-primary transition-colors"
                   >
-                    +1 (123) 456-7890
+                    7396681980
                   </a>
                 </div>
               </div>
+              {/* Location */}
               <div className="flex items-start space-x-4">
                 <div className="p-3 rounded-full bg-primary/10">
                   <MapPin className="h-6 w-6 text-primary" />
                 </div>
                 <div>
                   <h4 className="font-medium">Location</h4>
-                  <a className="text-muted-foreground hover:text-primary transition-colors">
-                    Vancouver, BC, Canada
-                  </a>
+                  <span className="text-muted-foreground">India</span>
                 </div>
               </div>
             </div>
@@ -95,10 +111,10 @@ const ContactSection = () => {
             <div className="pt-8">
               <h4 className="font-medium mb-4">Connect With Me</h4>
               <div className="flex space-x-4 justify-center">
-                <a href="#" target="_blank">
+                <a href="https://www.linkedin.com/in/dhanyaja-chakram-9269772a2/" target="_blank">
                   <Linkedin />
                 </a>
-                <a href="#" target="_blank">
+                {/* <a href="#" target="_blank">
                   <Twitter />
                 </a>
                 <a href="#" target="_blank">
@@ -106,52 +122,44 @@ const ContactSection = () => {
                 </a>
                 <a href="#" target="_blank">
                   <Twitch />
-                </a>
+                </a> */}
               </div>
             </div>
           </div>
 
-          <div className="bg-card p-8 rounded-lg shadow-xs" onSubmit={handleSubmit}>
+          {/* Contact Form */}
+          <div className="bg-card p-8 rounded-lg shadow-xs">
             <h3 className="text-2xl font-semibold mb-6">Send a Message</h3>
 
-            <form className="space-y-6">
+            <form ref={formRef} onSubmit={handleSubmit} className="space-y-6">
               <div>
-                <label
-                  htmlFor="name"
-                  className="block text-sm font-medium mb-2"
-                >
+                <label htmlFor="name" className="block text-sm font-medium mb-2">
                   Your Name
                 </label>
                 <input
                   type="text"
                   id="name"
-                  name="name"
+                  name="user_name"
                   required
                   className="w-full px-4 py-3 rounded-md border border-input bg-background focus:outline-hidden focus:ring-2 focus:ring-primary"
                   placeholder="Dhanyaja..."
                 />
               </div>
               <div>
-                <label
-                  htmlFor="email"
-                  className="block text-sm font-medium mb-2"
-                >
+                <label htmlFor="email" className="block text-sm font-medium mb-2">
                   Your Email
                 </label>
                 <input
                   type="email"
                   id="email"
-                  name="email"
+                  name="user_email"
                   required
                   className="w-full px-4 py-3 rounded-md border border-input bg-background focus:outline-hidden focus:ring-2 focus:ring-primary"
                   placeholder="john@gmail.com"
                 />
               </div>
               <div>
-                <label
-                  htmlFor="message"
-                  className="block text-sm font-medium mb-2"
-                >
+                <label htmlFor="message" className="block text-sm font-medium mb-2">
                   Your Message
                 </label>
                 <textarea
@@ -166,9 +174,7 @@ const ContactSection = () => {
               <button
                 type="submit"
                 disabled={isSubmitting}
-                className={cn(
-                  "cosmic-button w-full flex items-center justify-center gap-2"
-                )}
+                className={cn("cosmic-button w-full flex items-center justify-center gap-2")}
               >
                 {isSubmitting ? 'Sending...' : 'Send Message'}
                 <Send size={16} />

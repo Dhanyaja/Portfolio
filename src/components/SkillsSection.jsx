@@ -8,12 +8,16 @@ const skills = [
     {name: 'React', level: 85, category: 'frontend'},
     {name: 'TypeScript', level: 85, category: 'frontend'},
     {name: 'TailwindCSS', level: 85, category: 'frontend'},
+    {name: 'ExpressJS', level: 50, category: 'backend'},
 
     {name: 'Git/GitHub', level: 90, category: 'tools'},
-    {name: 'VS Code', level: 95, category: 'tools'}
+    {name: 'VS Code', level: 95, category: 'tools'},
+
+    {name: 'MySQL', level: 70, category: 'database'},
+    {name: 'MongoDB', level: 70, category: 'database'},
 ]
 
-const  categories =  ['all', 'frontend', 'backend', 'tools']
+const  categories =  ['all', 'frontend', 'backend', 'database', 'tools']
 
 const SkillsSection = () => {
 
