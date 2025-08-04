@@ -8,7 +8,8 @@ const projects = [
         description: 'A platform that adapts to your learning style and helps you master any subject efficiently.',
         image: '/projects/project1.jpeg',
         tags: ['React', 'TailwindCSS', 'ExpressJS', 'MongoDB'],
-        demoUrl: 'https://checkfinal-1.onrender.com/',
+        demoUrl: 'https://studyspace2-production-71e5.up.railway.app/',
+        // demoUrl: 'https://checkfinal-1.onrender.com/',
         githubUrl: 'https://github.com/Dhanyaja/CheckFinal',
     },
     {
@@ -17,7 +18,8 @@ const projects = [
         description: 'A clone of LinkedIn with user profiles, posts.',
         image: '/projects/project2.jpeg',
         tags: ['React', 'TailwindCSS', 'Firebase', 'Redux'],
-        demoUrl: 'https://linkedinclone-0833.onrender.com/',
+        demoUrl: 'https://lucky-ganache-963844.netlify.app/',
+        // demoUrl: 'https://linkedinclone-0833.onrender.com/',
         githubUrl: 'https://github.com/Dhanyaja/linkedInClone',
     },
     {
@@ -26,7 +28,8 @@ const projects = [
         description: 'An AI-powered mock interview platform that helps you prepare for job interviews with personalized feedback.',
         image: '/projects/project3.jpeg',
         tags: ['React', 'TailwindCSS', 'Firebase', 'TypeScript'],
-        demoUrl: 'https://ai-mock-interview-ojd4.onrender.com/',
+        demoUrl: 'https://cozy-faloodeh-3e9cc9.netlify.app/',
+        // demoUrl: 'https://ai-mock-interview-ojd4.onrender.com/',
         githubUrl: 'https://github.com/Dhanyaja/ai-mock-interview',
     },
     
