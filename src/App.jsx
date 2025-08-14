@@ -8,7 +8,7 @@ function App() {
   return (
     <>
       <Toaster />
-      <HashRouter basename="/Portfolio">
+      <HashRouter>
         <Routes>
           <Route index element={<Home />} />
           <Route path='*' element={<NotFound />}/>
